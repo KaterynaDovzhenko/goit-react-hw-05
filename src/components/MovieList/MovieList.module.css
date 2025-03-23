@@ -1,0 +1,64 @@
+/* MovieList styles */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #3e3e4a;
+  color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Movie image styling */
+img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Title and text styling */
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+p {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: purple;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+a:hover {
+  background-color: #8e44ad;
+}

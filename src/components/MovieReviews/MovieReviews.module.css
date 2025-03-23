@@ -1,0 +1,33 @@
+.ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.reviewName {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+p.noReviews {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+li:last-child {
+  border-bottom: none;
+}

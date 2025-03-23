@@ -1,0 +1,32 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #333;
+  padding: 16px;
+  margin-top: 200px;
+  gap: 15px;
+}
+
+.link {
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.active {
+  color: #fff;
+  background-color: purple;
+  transform: scale(1.05);
+}
+
+.link:hover {
+  background-color: #444;
+  color: #f3f3f3;
+}
