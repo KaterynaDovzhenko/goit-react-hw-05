@@ -1,4 +1,5 @@
 import { useEffect, useState, UseState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { fetchMovies } from "../MovieSearch";
 import MovieList from "../components/MovieList/MovieList";
@@ -9,12 +10,9 @@ export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [searchMovie, setSearchMovie] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSearch = (value) => {
-    setSearchMovie(value);
-    setMovies([]);
-  };
+  const searchMovie = searchParams.get("query") || "";
 
   useEffect(() => {
     async function getMovies() {
@@ -22,9 +20,7 @@ export default function MoviesPage() {
         setIsLoading(true);
         setError(false);
         const data = await fetchMovies(searchMovie);
-        setMovies((prevMovies) => {
-          return [...prevMovies, ...data];
-        });
+        setMovies(data);
       } catch {
         setError(true);
       } finally {
@@ -33,6 +29,12 @@ export default function MoviesPage() {
     }
     getMovies();
   }, [searchMovie]);
+
+  const handleSearch = (value) => {
+    setSearchParams(value ? { query: value } : {});
+    setMovies([]);
+  };
+
   return (
     <div>
       <Toaster></Toaster>

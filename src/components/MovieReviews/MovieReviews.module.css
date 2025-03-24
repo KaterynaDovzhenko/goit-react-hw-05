@@ -1,19 +1,32 @@
 .ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  background-color: #ffffff2b;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: block;
 }
 
 li {
-  border-bottom: 1px solid #ddd;
   padding: 20px;
   margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+li:hover {
+  background-color: #463042ce;
+  transition: background-color 0.3s ease;
 }
 
 .reviewName {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 p {
@@ -26,6 +39,7 @@ p.noReviews {
   text-align: center;
   font-size: 1.2rem;
   margin-top: 20px;
+  font-style: italic;
 }
 
 li:last-child {

@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import css from "./MovieList.module.css";
 
 export default function MovieList({ movies }) {
+  const location = useLocation();
   if (!Array.isArray(movies) || movies.length === 0) {
     return <p>No movies found.</p>;
   }
@@ -18,7 +19,9 @@ export default function MovieList({ movies }) {
           )}
           <h3>{movie.title}</h3>
           <p>{movie.overview}</p>
-          <Link to={`/movies/${movie.id}`}>Details</Link>
+          <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+            Details
+          </Link>
         </li>
       ))}
     </ul>

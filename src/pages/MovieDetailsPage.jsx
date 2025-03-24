@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
 import {
-  fetchMoviesByID,
-  fetchMovieCast,
-  fetchMovieReviews,
-} from "../MovieSearch";
-import MovieCast from "../components/MovieCast/MovieCast";
-import MovieReviews from "../components/MovieReviews/MovieReviews";
+  NavLink,
+  Link,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import { fetchMoviesByID } from "../MovieSearch";
 import NotFoundPage from "./NotFoundPage";
 import clsx from "clsx";
 import css from "./MovieDetailsPage.module.css";
@@ -21,9 +20,9 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [selectedTab, setSelectedTab] = useState("");
-  const [cast, setCast] = useState([]);
-  const [reviews, setReviews] = useState([]);
+
+  const location = useLocation();
+  const prevLocation = useRef(location.state?.from ?? "/movies");
 
   useEffect(() => {
     async function getMovie() {
@@ -33,12 +32,6 @@ export default function MovieDetailsPage() {
 
         const data = await fetchMoviesByID(movieId);
         setMovie(data);
-
-        const dataCast = await fetchMovieCast(movieId);
-        setCast(dataCast);
-
-        const dataReviews = await fetchMovieReviews(movieId);
-        setReviews(dataReviews);
       } catch {
         setError(true);
       } finally {
@@ -51,8 +44,8 @@ export default function MovieDetailsPage() {
   return (
     <div className={css.movieDetailsContainer}>
       {isLoading && <p>Loading movies...</p>}
-      {error && <NotFoundPage></NotFoundPage>}
-      <Link className={css.btn} to="/">
+      {error && <NotFoundPage />}
+      <Link className={css.btn} to={prevLocation.current}>
         go back
       </Link>
       {movie && (
@@ -71,28 +64,17 @@ export default function MovieDetailsPage() {
           <h4>Additional Information</h4>
           <ul className={css.tabList}>
             <li className={css.menu}>
-              <NavLink
-                className={linkClass}
-                to="#"
-                onClick={() => setSelectedTab("cast")}
-              >
+              <NavLink className={linkClass} to="cast">
                 Cast
               </NavLink>
             </li>
             <li className={css.menu}>
-              <NavLink
-                className={linkClass}
-                to="#"
-                onClick={() => setSelectedTab("reviews")}
-              >
+              <NavLink className={linkClass} to="reviews">
                 Reviews
               </NavLink>
             </li>
           </ul>
-          <div>
-            {selectedTab === "cast" && <MovieCast cast={cast} />}
-            {selectedTab === "reviews" && <MovieReviews reviews={reviews} />}
-          </div>
+          <Outlet />
         </div>
       )}
     </div>

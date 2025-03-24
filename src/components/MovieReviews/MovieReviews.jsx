@@ -1,6 +1,19 @@
+import { useParams } from "react-router-dom";
 import css from "./MovieReviews.module.css";
+import { useEffect, useState } from "react";
+import { fetchMovieReviews } from "../../MovieSearch";
 
-export default function MovieReviews({ reviews }) {
+export default function MovieReviews() {
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    async function getReviews() {
+      const data = await fetchMovieReviews(movieId);
+      setReviews(data);
+    }
+    getReviews();
+  }, [movieId]);
   return (
     <ul className={css.ul}>
       {reviews.length > 0 ? (

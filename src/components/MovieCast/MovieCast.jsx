@@ -1,6 +1,19 @@
+import { useEffect, useState } from "react";
 import css from "./MovieCast.module.css";
+import { fetchMovieCast } from "../../MovieSearch";
+import { useParams } from "react-router-dom";
 
-export default function MovieCast({ cast }) {
+export default function MovieCast() {
+  const { movieId } = useParams();
+  const [cast, setCast] = useState([]);
+
+  useEffect(() => {
+    async function getCast() {
+      const data = await fetchMovieCast(movieId);
+      setCast(data);
+    }
+    getCast();
+  }, [movieId]);
   return (
     <ul className={css.ul}>
       {cast.length > 0 ? (

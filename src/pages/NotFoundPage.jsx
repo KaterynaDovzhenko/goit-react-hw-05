@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useRef } from "react";
 import css from "./NotFoundPage.module.css";
 
 export default function NotFoundPage() {
+  const location = useLocation();
+  const prevLocation = useRef(location.state?.from || "/movies");
+
   return (
     <div>
       <div className={css.errorPage}>
@@ -12,7 +16,7 @@ export default function NotFoundPage() {
         <div id="particles-js"></div>
       </div>
 
-      <Link className={css.btn} to="/">
+      <Link className={css.btn} to={prevLocation.current}>
         go back :/
       </Link>
     </div>

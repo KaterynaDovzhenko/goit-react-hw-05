@@ -11,7 +11,7 @@ export const fetchMovies = async (value) => {
       page: 1,
     };
 
-    if (value.trim()) {
+    if (value && value.typeof === "string" && value.trim()) {
       url = "https://api.themoviedb.org/3/search/movie";
       params = {
         ...params,
@@ -59,6 +59,5 @@ export const fetchMovieReviews = async (movieId) => {
       },
     }
   );
-  console.log(response.data.results);
   return response.data.results;
 };
