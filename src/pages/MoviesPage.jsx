@@ -1,7 +1,7 @@
-import { useEffect, useState, UseState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import { fetchMovies } from "../MovieSearch";
+import { fetchMoviesSearch } from "../MovieSearch";
 import MovieList from "../components/MovieList/MovieList";
 import NotFoundPage from "./NotFoundPage";
 import SearchBar from "../components/SearchBar/SearchBar";
@@ -19,7 +19,7 @@ export default function MoviesPage() {
       try {
         setIsLoading(true);
         setError(false);
-        const data = await fetchMovies(searchMovie);
+        const data = await fetchMoviesSearch(searchMovie);
         setMovies(data);
       } catch {
         setError(true);
